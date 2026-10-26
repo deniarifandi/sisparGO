@@ -1,0 +1,37 @@
+*/config/development
+*/logs/log-*.php
+!*/logs/index.html
+*/cache/*
+!system/cache/*
+!*/cache/index.html
+!*/cache/.htaccess
+
+user_guide_src/build/*
+user_guide_src/cilexer/build/*
+user_guide_src/cilexer/dist/*
+user_guide_src/cilexer/pycilexer.egg-info/*
+
+#codeigniter 3
+application/logs/*
+!application/logs/index.html
+!application/logs/.htaccess
+/vendor/
+/writable
+/tests
+.env
+php.ini
+/public/uploads/
+Dockerfile
+potensi_riwayat (1).sql
+potensi_riwayat.sql
+public/images/1. katia.docx
+public/images/cetakkartu_41.pdf
+public/images/cetakkartu_75.pdf
+public/images/RAPOT ENGLISH K1 A -NEW FORM SEM 1 25-26.xlsx
+public/images/SEMESTER MATH REPORT K1A 2025-2026.xlsx
+sisparma_evo (1).sql
+sisparma_evo.sql
+vendor.zip
+/work
+docs/KAK_Pengembangan_dan_Pemeliharaan_SISPARMA_2026.docx
+kta_perpanjangan.sql
