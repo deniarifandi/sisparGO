@@ -1,0 +1,395 @@
+
+        :root {
+            --navy:       #0d47a1;
+            --navy-deep:  #082c82;
+            --navy-soft:  #eaeffa;
+            --amber:      #f59e0b;
+            --amber-deep: #92400e;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #f4f6fc;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 28px 16px 48px;
+        }
+
+        /* ── Main card ── */
+       .kta-card {
+    width: min(95vw, 1200px);
+    border-radius: 18px !important;
+    overflow: hidden;
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(13,71,161,.05), 0 12px 32px rgba(13,71,161,.12);
+}
+
+/* titpar_add mobile fix */
+@media (max-width: 576px) {
+    .card-body { padding: 1rem !important; }
+    .d-flex.justify-content-end {
+        flex-direction: column-reverse;
+        gap: 10px !important;
+    }
+    .d-flex.justify-content-end .btn { width: 100%; }
+}
+
+@media (min-width: 992px) {
+    .card-body {
+        padding: 32px !important;
+    }
+
+    .upload-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .form-label {
+        font-size: 13px;
+    }
+
+    .form-control,
+    textarea.form-control {
+        font-size: 15px;
+        padding: 12px 14px;
+    }
+
+    .btn-navy {
+        font-size: 15px;
+        padding: 15px;
+    }
+
+    .kta-header {
+        padding: 28px 32px;
+    }
+
+    .kta-steps {
+        padding: 20px 32px 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .kta-card {
+        width: 100%;
+        border-radius: 0 !important;
+    }
+
+    .card-body {
+        padding: 16px !important;
+    }
+
+    .upload-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+        /* ── Header ── */
+        .kta-header {
+            background: var(--navy);
+            padding: 22px 26px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .kta-header::before {
+            content: '';
+            position: absolute;
+            width: 160px; height: 160px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,.07);
+            top: -55px; right: -45px;
+            pointer-events: none;
+        }
+        .kta-header::after {
+            content: '';
+            position: absolute;
+            width: 90px; height: 90px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,.05);
+            top: -10px; right: 10px;
+            pointer-events: none;
+        }
+
+        .hdr-shield {
+            width: 48px; height: 48px;
+            background: rgba(255,255,255,.14);
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .kta-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--amber);
+            color: var(--amber-deep);
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 4px 11px 4px 8px;
+            border-radius: 20px;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        /* ── Process steps ── */
+        .kta-steps {
+            background: #fff;
+            padding: 16px 26px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .step-dot {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            border: 2px solid #dde4f2;
+            color: #98a4bc;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+        }
+
+        .step.is-active .step-dot {
+            background: var(--navy);
+            border-color: var(--navy);
+            color: #fff;
+        }
+
+        .step-lbl {
+            font-size: 9.5px;
+            font-weight: 500;
+            color: #98a4bc;
+            white-space: nowrap;
+        }
+        .step.is-active .step-lbl {
+            color: var(--navy);
+            font-weight: 700;
+        }
+
+        .step-line {
+            flex: 1;
+            height: 1px;
+            background: #dde4f2;
+            margin: 14px 5px 0;
+        }
+
+        /* ── Nav tabs (Bootstrap pill override) ── */
+        .kta-tabs {
+            background: #f4f6fc;
+            border-radius: 9px;
+            padding: 3px;
+        }
+
+        .kta-tabs .nav-link {
+            color: #5a6882;
+            font-weight: 600;
+            font-size: 13px;
+            border-radius: 7px !important;
+            padding: 9px 12px;
+            border: none;
+            transition: all .2s;
+        }
+
+        .kta-tabs .nav-link.active {
+            color: var(--navy);
+            background: #fff;
+            box-shadow: 0 1px 5px rgba(13,71,161,.11);
+        }
+
+        .kta-tabs .nav-link:not(.active):hover {
+            color: var(--navy);
+            background: rgba(255,255,255,.5);
+        }
+
+        /* ── Section badges ── */
+        .sec-badge {
+            width: 22px; height: 22px;
+            background: var(--navy-soft);
+            color: var(--navy);
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .sec-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--navy);
+            letter-spacing: .09em;
+            text-transform: uppercase;
+        }
+
+        /* ── Form overrides ── */
+        .form-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #5a6882;
+            margin-bottom: 5px;
+        }
+
+        .form-control, textarea.form-control {
+            border: 1.5px solid #c8d3e8;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #1a2540;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-control::placeholder {
+            color: #98a4bc;
+        }
+
+        .form-control:focus {
+            border-color: var(--navy);
+            box-shadow: 0 0 0 3px rgba(13,71,161,.09);
+        }
+
+        /* NIK live counter */
+        .nik-ctr {
+            position: absolute;
+            right: 11px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 10px;
+            font-weight: 600;
+            color: #98a4bc;
+            pointer-events: none;
+            transition: color .2s;
+        }
+        .nik-ctr.ok { color: #16a34a; }
+
+        .invalid-text {
+            font-size: 11px;
+            color: #dc2626;
+            margin-top: 4px;
+        }
+
+        /* ── Upload zones ── */
+        .upload-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .uz-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #5a6882;
+            margin-bottom: 5px;
+        }
+
+        .uz {
+            border: 1.5px dashed #c8d3e8;
+            border-radius: 9px;
+            padding: 16px 8px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color .2s, background .2s;
+            position: relative;
+            background: #fff;
+        }
+        .uz:hover   { border-color: var(--navy); background: var(--navy-soft); }
+        .uz.filled  { border-style: solid; border-color: var(--navy); background: var(--navy-soft); }
+
+        .uz input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        .uz-icon {
+            width: 34px; height: 34px;
+            background: var(--navy-soft);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 7px;
+            color: var(--navy);
+            transition: background .2s;
+        }
+        .uz:hover .uz-icon,
+        .uz.filled .uz-icon { background: rgba(255,255,255,.7); }
+        .uz-icon svg { width: 18px; height: 18px; }
+
+        .uz-name {
+            font-size: 11px;
+            font-weight: 600;
+            color: #1a2540;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0 4px;
+        }
+        .uz-hint {
+            font-size: 10px;
+            color: #98a4bc;
+            margin-top: 2px;
+        }
+
+        /* ── Submit button ── */
+        .btn-navy {
+            background: var(--navy);
+            color: #fff;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: .015em;
+            border: none;
+            border-radius: 9px;
+            padding: 13px;
+            transition: background .2s, transform .15s;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-navy:hover  { background: var(--navy-deep); color: #fff; transform: translateY(-1px); }
+        .btn-navy:active { transform: translateY(0); }
+
+        /* ── Status info box ── */
+        .status-note {
+            background: var(--navy-soft);
+            border-radius: 10px;
+            padding: 13px 15px;
+            font-size: 13px;
+            color: #1a4699;
+            line-height: 1.55;
+        }
+
+        /* ── Flash alerts ── */
+        .kta-alert {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            padding: 11px 14px;
+            border-radius: 9px;
+            font-size: 13px;
+            line-height: 1.45;
+        }
+        .kta-alert svg { flex-shrink: 0; margin-top: 1px; }
+        .kta-alert-success { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+        .kta-alert-error   { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+        .kta-alert ul { padding-left: 16px; margin-top: 4px; margin-bottom: 0; }
+
+        @media (max-width: 400px) {
+            .kta-header, .kta-steps { padding-left: 18px; padding-right: 18px; }
+            .card-body { padding: 16px 18px !important; }
+            .upload-grid { grid-template-columns: 1fr; }
+        }

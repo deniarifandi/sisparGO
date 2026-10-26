@@ -1,0 +1,60 @@
+.profile-img {
+    width: 90px; height: 90px;
+    object-fit: cover; border-radius: 50%;
+    border: 3px solid #dee2e6;
+}
+.profile-placeholder {
+    width: 90px; height: 90px;
+    border-radius: 50%; border: 3px solid #dee2e6;
+    background: #f8f9fa;
+    display: flex; align-items: center; justify-content: center;
+}
+@media (min-width: 768px) {
+    .profile-img, .profile-placeholder { width: 110px; height: 110px; }
+}
+.nav-tabs { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.nav-tabs .nav-link { font-size: 13px; font-weight: 500; white-space: nowrap; }
+.nav-tabs .nav-link.active { font-weight: 600; }
+.lbl {
+    font-size: 11px; font-weight: 600;
+    color: #6c757d; text-transform: uppercase; letter-spacing: 0.4px;
+}
+.val { font-size: 13px; color: #212529; word-break: break-word; }
+.doc-thumb {
+    width: 100%; height: 160px;
+    object-fit: cover; border-radius: 6px;
+    border: 1px solid #dee2e6; cursor: pointer;
+    transition: opacity .2s;
+}
+@media (min-width: 768px) { .doc-thumb { height: 250px; } }
+.doc-thumb:hover { opacity: .85; }
+.doc-empty {
+    height: 130px; border-radius: 6px;
+    border: 1px dashed #ced4da; background: #f8f9fa;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #adb5bd;
+}
+.potensi-box {
+    text-align: center; padding: 12px 6px;
+    border-radius: 8px; background: #f8f9fa;
+    border: 1px solid #e9ecef;
+}
+.potensi-box .day { font-size: 11px; color: #6c757d; font-weight: 600; }
+.potensi-box .cnt { font-size: 22px; font-weight: 700; color: #0d6efd; line-height: 1.2; }
+.section-header { font-size: 13px; font-weight: 600; }
+@media (max-width: 420px) {
+    .lv-table td.lbl, .lv-table td.val {
+        display: block; width: 100% !important;
+        padding-top: 2px; padding-bottom: 2px;
+    }
+    .lv-table td.lbl { padding-bottom: 0; }
+    .lv-table tr { display: block; margin-bottom: 6px; }
+}
+.meta-block { text-align: left; margin-top: 10px; }
+@media (min-width: 768px) { .meta-block { text-align: right; margin-top: 0; } }
+
+/* titpar detail */
+.btn-auto-sm { width: 100%; }
+@media (min-width: 576px) {
+    .btn-auto-sm { width: auto; }
+}

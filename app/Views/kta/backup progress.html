@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Status & Lengkapi Data Pendaftaran</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; padding: 20px; color: #333; }
+        .wrapper { max-width: 1100px; margin: 0 auto; display: flex; gap: 20px; flex-wrap: wrap; }
+        
+        /* Sidebar for Status */
+        .sidebar { flex: 1; min-width: 300px; }
+        .status-card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: sticky; top: 20px; }
+        
+        /* Main Content for Form */
+        .main-content { flex: 2; min-width: 500px; }
+        .form-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+
+        /* Typography & Components */
+        h2, h3 { margin-top: 0; color: #1a73e8; }
+        .badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 14px; font-weight: bold; background: #e8f0fe; color: #1a73e8; margin-bottom: 15px; }
+        .info-group { margin-bottom: 15px; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+        .info-label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+        .info-value { font-size: 15px; font-weight: 600; display: block; }
+
+        /* Form Styling */
+        .grid-form { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        label { display: block; font-weight: 600; font-size: 14px; margin-bottom: 8px; margin-top: 15px; }
+        input[type="text"], input[type="date"], textarea, input[type="file"] {
+            width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 14px;
+        }
+        textarea { height: 80px; resize: vertical; }
+        .file-box { background: #f8f9fa; border: 1px dashed #ccc; padding: 10px; border-radius: 6px; margin-top: 5px; }
+        .btn-update { width: 100%; background: #28a745; color: white; border: none; padding: 15px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 25px; transition: 0.2s; }
+        .btn-update:hover { background: #218838; }
+
+        /* Logout Button Styling */
+.btn-logout {
+    display: block;
+    
+    text-align: center;
+    text-decoration: none;
+    background: #fff5f5; /* Very light red */
+    color: #d93025;      /* Professional danger red */
+    border: 1px solid #fad2cf;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+    background: #d93025;
+    color: white;
+    box-shadow: 0 4px 12px rgba(217, 48, 37, 0.2);
+}
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    
+    <aside class="sidebar">
+        <div class="status-card">
+            <h3>Status Pendaftaran</h3>
+            <?php 
+                // Definisikan label status
+                $status_list = [
+                    '0' => ['label' => 'Verifikasi Berkas', 'color' => '#ffc107', 'text' => '#000'], // Kuning
+                    '1' => ['label' => 'Disetujui', 'color' => '#28a745', 'text' => '#fff'],             // Hijau
+                    '2' => ['label' => 'Ditolak', 'color' => '#dc3545', 'text' => '#fff'] // Merah
+                ];
+
+                // Ambil status saat ini, default ke 0 jika kosong
+                $current_status = $user['anggota_status'] ?? '0';
+                $display = $status_list[$current_status] ?? $status_list['0'];
+            ?>
+
+            <div class="badge" style="background-color: <?= $display['color'] ?>; color: <?= $display['text'] ?>;">
+                <?= $display['label'] ?>
+            </div>
+
+            <div class="info-group">
+                <span class="info-label">ID Anggota</span>
+                <span class="info-value"><?= $user['register_anggotaid'] ?: '<i style="color:#ccc">Belum diterbitkan</i>' ?></span>
+            </div>
+
+            <div class="info-group">
+                <span class="info-label">Virtual Account (VA)</span>
+                <span class="info-value"><?= $user['register_va'] ?: '-' ?></span>
+            </div>
+
+            <div class="info-group">
+                <span class="info-label">Titpar ID / Group</span>
+                <span class="info-value">
+                    <?= $user['register_titparid'] ?: '-' ?> / <?= $user['register_titpargrupid'] ?: '-' ?>
+                </span>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h4 style="font-size: 14px;">Dokumen Pendukung dari Admin:</h4>
+                <div class="info-group">
+                    <span class="info-label">Berita Acara</span>
+                    <span class="info-value">
+                        <?php if($user['berita_acara']): ?>
+                            <a href="<?= base_url('uploads/berita_acara/'.$user['berita_acara']) ?>" target="_blank" style="color:#1a73e8; text-decoration:none;">⬇ Unduh File</a>
+                        <?php else: ?>
+                            <span style="color:#999">Belum diunggah admin</span>
+                        <?php endif; ?>
+                    </span>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">Surat Penunjukan</span>
+                    <span class="info-value">
+                        <?php if($user['penunjukan']): ?>
+                            <a href="<?= base_url('uploads/penunjukan/'.$user['penunjukan']) ?>" target="_blank" style="color:#1a73e8; text-decoration:none;">⬇ Unduh File</a>
+                        <?php else: ?>
+                            <span style="color:#999">Belum diunggah admin</span>
+                        <?php endif; ?>
+                    </span>
+                </div>
+                <div class="info-group">
+                    <a class="btn btn-logout" href="<?php echo base_url(); ?>pendaftaran">Keluar</a>
+                </div>
+
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="form-card">
+            <h2>Lengkapi Data Anda</h2>
+            <p style="color:#666; font-size: 14px;">Silakan perbarui data profil dan unggah berkas yang diperlukan di bawah ini.</p>
+
+            <form action="<?= base_url('register/update') ?>" method="post" enctype="multipart/form-data">
+                <?= csrf_field() ?>
+                <input type="hidden" name="id" value="<?= $user['id'] ?>">
+                <input type="hidden" name="anggota_noktp" value="<?= $user['anggota_noktp'] ?>">
+                <div class="grid-form">
+                    <div>
+                        <label>Nama Lengkap</label>
+                        <input type="text" name="anggota_nama" value="<?= $user['anggota_nama'] ?>" required>
+                    </div>
+                    <div>
+                        <label>NIK (Tidak dapat diubah)</label>
+                        <input type="text" value="<?= $user['anggota_noktp'] ?>" disabled style="background:#f0f0f0">
+                    </div>
+                </div>
+
+                <label>Nomor HP / WhatsApp</label>
+                <input type="text" name="hp" value="<?= $user['hp'] ?>" placeholder="Contoh: 08123456789" required>
+
+                <label>Alamat Lengkap</label>
+                <textarea name="anggota_alamat" required><?= $user['anggota_alamat'] ?></textarea>
+
+                <label>Tanggal Lahir</label>
+                <input type="date" name="anggota_tgllhr" value="<?= $user['anggota_tgllhr'] ?>" required>
+
+                <h3 style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">Unggah Berkas (PDF/JPG)</h3>
+                
+                <div class="grid-form">
+                     <div>
+        <label>Foto</label>
+        <?= showFileLink($user['anggota_foto'], 'anggota_foto') ?>
+        <input type="file" name="anggota_foto">
+    </div>
+                     <div>
+        <label>KTP</label>
+        <?= showFileLink($user['foto_ktp'], 'foto_ktp') ?>
+        <input type="file" name="foto_ktp">
+    </div>
+    <div>
+        <label>Surat Kesanggupan</label>
+        <?= showFileLink($user['kesanggupan'], 'kesanggupan') ?>
+        <input type="file" name="kesanggupan">
+    </div>
+
+    <div>
+        <label>Surat Persetujuan Pemilik</label>
+        <?= showFileLink($user['keberatan'], 'keberatan') ?>
+        <input type="file" name="keberatan">
+    </div>
+
+    <div>
+        <label>Denah Lokasi</label>
+        <?= showFileLink($user['denah'], 'denah') ?>
+        <input type="file" name="denah">
+    </div>
+
+    <div>
+        <label>Kartu Keluarga (KK)</label>
+        <?= showFileLink($user['kk'], 'kk') ?>
+        <input type="file" name="kk">
+    </div>
+</div>
+
+                <button type="submit" class="btn-update">Simpan & Perbarui Data</button>
+            </form>
+        </div>
+    </main>
+</div>
+
+<?php
+/**
+ * Helper to display current file link inside the form
+ */
+function showFileLink($file, $folder) {
+    if ($file) {
+        return '
+            <div class="file-box" style="background: #f8f9fa; border: 1px dashed #ccc; padding: 10px; border-radius: 6px; margin-bottom: 5px;">
+                <span style="color:#28a745; font-size:12px; font-weight:bold;">✔ File Tersimpan</span><br>
+                <a href="'.base_url('uploads/'.$folder.'/'.$file).'" target="_blank" style="font-size:12px; color:#1a73e8; text-decoration: underline;">
+                    Lihat Berkas Saat Ini
+                </a>
+            </div>';
+    }
+    return '
+        <div class="file-box" style="background: #fff5f5; border: 1px dashed #feb2b2; padding: 10px; border-radius: 6px; margin-bottom: 5px;">
+            <span style="color:#dc3545; font-size:12px;">✘ Belum ada file</span>
+        </div>';
+}
+?>
+
+</body>
+</html>

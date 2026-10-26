@@ -1,0 +1,51 @@
+services:
+  web:
+    build: .
+    container_name: ci4_app
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html
+    depends_on:
+      - db
+    networks:
+      - ci4_network
+
+  db:
+    image: mysql:8
+    container_name: ci4_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: dishub2026
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./mysql.cnf:/etc/mysql/conf.d/mysql.cnf   # 👈 add this line
+    command: --sql-mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+    networks:
+      - ci4_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: ci4_phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+    networks:
+      - ci4_network
+
+volumes:
+  db_data:
+
+networks:
+  ci4_network:
+    external: true
